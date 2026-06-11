@@ -384,79 +384,118 @@ export function TimelineSwiper() {
         </AnimatePresence>
       </div>
 
-      {/* ── swipe hint label (fades once interacted) ── */}
+      {/* ── swipe hint (fades once interacted) ── */}
       <AnimatePresence>
         {!hasInteracted && (
           <motion.div
-            className="relative z-10 flex items-center justify-center gap-2 pb-2"
+            className="relative z-10 flex flex-col items-center gap-1.5 pb-1"
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1, transition: { delay: 1.2 } }}
-            exit={{ opacity: 0, transition: { duration: 0.3 } }}
+            animate={{ opacity: 1, transition: { delay: 1.0, duration: 0.6 } }}
+            exit={{ opacity: 0, transition: { duration: 0.4 } }}
           >
-            <svg className="w-3.5 h-3.5 animate-bounce-x" viewBox="0 0 24 24"
-              fill="none" stroke="#9CAFAA" strokeWidth="1.5" strokeLinecap="round">
-              <path d="M9 18l6-6-6-6" />
-            </svg>
-            <span className="font-sans font-light text-[9px] tracking-[0.4em] uppercase" style={{ color: "#3D2B1F" }}>
+            {/* animated hand SVG */}
+            <motion.div
+              animate={{ x: [0, -28, 0, -28, 0] }}
+              transition={{ delay: 1.6, duration: 1.8, times: [0, 0.25, 0.5, 0.75, 1], ease: "easeInOut", repeat: Infinity, repeatDelay: 2.5 }}
+            >
+              <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                {/* palm */}
+                <path d="M19 30 C13 30 9 25 9 19 L9 12 C9 10.9 9.9 10 11 10 C12.1 10 13 10.9 13 12 L13 8 C13 6.9 13.9 6 15 6 C16.1 6 17 6.9 17 8 L17 7 C17 5.9 17.9 5 19 5 C20.1 5 21 5.9 21 7 L21 8 C21 6.9 21.9 6 23 6 C24.1 6 25 6.9 25 8 L25 19 C25 25 21 30 19 30 Z"
+                  fill="#D6A99D" stroke="#B8826C" strokeWidth="1" strokeLinejoin="round"/>
+                {/* finger lines */}
+                <line x1="13" y1="12" x2="13" y2="18" stroke="#B8826C" strokeWidth="0.8" strokeLinecap="round"/>
+                <line x1="17" y1="8"  x2="17" y2="18" stroke="#B8826C" strokeWidth="0.8" strokeLinecap="round"/>
+                <line x1="21" y1="7"  x2="21" y2="18" stroke="#B8826C" strokeWidth="0.8" strokeLinecap="round"/>
+                <line x1="25" y1="8"  x2="25" y2="18" stroke="#B8826C" strokeWidth="0.8" strokeLinecap="round"/>
+                {/* motion trail */}
+                <path d="M7 18 L3 18" stroke="#9CAFAA" strokeWidth="1.2" strokeLinecap="round" opacity="0.5"/>
+                <path d="M6 15 L2 14" stroke="#9CAFAA" strokeWidth="0.8" strokeLinecap="round" opacity="0.3"/>
+                <path d="M6 21 L2 22" stroke="#9CAFAA" strokeWidth="0.8" strokeLinecap="round" opacity="0.3"/>
+              </svg>
+            </motion.div>
+            <span className="font-sans font-light text-[10px] tracking-[0.35em] uppercase" style={{ color: "#3D2B1F", opacity: 0.65 }}>
               Swipe to explore
             </span>
-            <svg className="w-3.5 h-3.5 animate-bounce-x rotate-180" viewBox="0 0 24 24"
-              fill="none" stroke="#9CAFAA" strokeWidth="1.5" strokeLinecap="round">
-              <path d="M9 18l6-6-6-6" />
-            </svg>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* ── dot indicators ── */}
-      <div className="relative z-10 flex items-center justify-center gap-1.5 sm:gap-2 py-4 pb-6">
-        {SLIDES.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => {
-              setDirection(i > current ? 1 : -1);
-              setCurrent(i);
-              setHasInteracted(true);
-            }}
-            aria-label={`Go to slide ${i + 1}`}
-            className="cursor-pointer transition-all duration-300 rounded-full"
-            style={{
-              width: i === current ? 18 : 6,
-              height: 6,
-              background: i === current
-                ? slide.accentDark
-                : `${slide.accentDark}35`,
-            }}
-          />
-        ))}
+      {/* ── dots + mobile arrows row ── */}
+      <div className="relative z-10 flex items-center justify-center gap-3 sm:gap-4 py-4 pb-5">
+        {/* prev arrow — always visible */}
+        <button
+          onClick={() => { goPrev(); setHasInteracted(true); }}
+          disabled={current === 0}
+          aria-label="Previous"
+          className="cursor-pointer flex items-center justify-center w-10 h-10 rounded-full border transition-all duration-200 active:scale-95 disabled:opacity-20 disabled:cursor-not-allowed"
+          style={{
+            background: "rgba(255,255,255,0.65)",
+            borderColor: `${slide.accentDark}35`,
+            backdropFilter: "blur(8px)",
+          }}
+        >
+          <ChevronLeft className="w-5 h-5" style={{ color: slide.accentDark }} />
+        </button>
+
+        {/* dots */}
+        <div className="flex items-center gap-1.5">
+          {SLIDES.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => { setDirection(i > current ? 1 : -1); setCurrent(i); setHasInteracted(true); }}
+              aria-label={`Go to slide ${i + 1}`}
+              className="cursor-pointer transition-all duration-300 rounded-full"
+              style={{
+                width: i === current ? 18 : 6,
+                height: 6,
+                background: i === current ? slide.accentDark : `${slide.accentDark}35`,
+              }}
+            />
+          ))}
+        </div>
+
+        {/* next arrow — always visible */}
+        <button
+          onClick={() => { goNext(); setHasInteracted(true); }}
+          disabled={current === total - 1}
+          aria-label="Next"
+          className="cursor-pointer flex items-center justify-center w-10 h-10 rounded-full border transition-all duration-200 active:scale-95 disabled:opacity-20 disabled:cursor-not-allowed"
+          style={{
+            background: "rgba(255,255,255,0.65)",
+            borderColor: `${slide.accentDark}35`,
+            backdropFilter: "blur(8px)",
+          }}
+        >
+          <ChevronRight className="w-5 h-5" style={{ color: slide.accentDark }} />
+        </button>
       </div>
 
-      {/* ── desktop prev / next arrows ── */}
+      {/* ── large side arrows — desktop only ── */}
       <button
-        onClick={goPrev}
+        onClick={() => { goPrev(); setHasInteracted(true); }}
         disabled={current === 0}
         aria-label="Previous"
         className="hidden md:flex absolute left-5 top-1/2 -translate-y-1/2 z-20
-                   w-11 h-11 items-center justify-center rounded-full
+                   w-12 h-12 items-center justify-center rounded-full
                    border bg-white/60 backdrop-blur-sm
                    transition-all duration-200 cursor-pointer
                    hover:bg-white/90 disabled:opacity-20 disabled:cursor-not-allowed"
         style={{ borderColor: `${slide.accentDark}30` }}
       >
-        <ChevronLeft className="w-5 h-5" style={{ color: slide.accentDark }} />
+        <ChevronLeft className="w-6 h-6" style={{ color: slide.accentDark }} />
       </button>
       <button
-        onClick={goNext}
+        onClick={() => { goNext(); setHasInteracted(true); }}
         disabled={current === total - 1}
         aria-label="Next"
         className="hidden md:flex absolute right-5 top-1/2 -translate-y-1/2 z-20
-                   w-11 h-11 items-center justify-center rounded-full
+                   w-12 h-12 items-center justify-center rounded-full
                    border bg-white/60 backdrop-blur-sm
                    transition-all duration-200 cursor-pointer
                    hover:bg-white/90 disabled:opacity-20 disabled:cursor-not-allowed"
         style={{ borderColor: `${slide.accentDark}30` }}
       >
-        <ChevronRight className="w-5 h-5" style={{ color: slide.accentDark }} />
+        <ChevronRight className="w-6 h-6" style={{ color: slide.accentDark }} />
       </button>
     </section>
   );
