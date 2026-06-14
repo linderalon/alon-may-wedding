@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLangContext } from "@/lib/lang-context";
 
 interface Confession { id: string; text: string; ts: number; }
 
@@ -18,13 +19,14 @@ const CARD_COLORS = [
 const CARD_ROTS = [-1.2, 0.8, -0.5, 1.4, -0.9, 0.3, -1.6, 0.6];
 
 export function ConfessionWall() {
+  const { t, dir } = useLangContext();
   const [confessions, setConfessions] = React.useState<Confession[]>([]);
   const [text, setText] = React.useState("");
   const [submitting, setSubmitting] = React.useState(false);
   const [submitted, setSubmitted] = React.useState(false);
   const [error, setError] = React.useState("");
   const inputRef = React.useRef<HTMLInputElement>(null);
-  const isRTL = /[֐-׿]/.test(text); // detect Hebrew
+  const isRTL = /[֐-׿]/.test(text) || dir === "rtl";
 
   React.useEffect(() => {
     fetch("/api/confessions")
@@ -36,7 +38,7 @@ export function ConfessionWall() {
     e.preventDefault();
     const trimmed = text.trim();
     if (!trimmed) return;
-    if (trimmed.length > 120) { setError("Max 120 characters"); return; }
+    if (trimmed.length > 120) { setError(t.confMaxError); return; }
     setSubmitting(true);
     setError("");
     try {
@@ -52,7 +54,7 @@ export function ConfessionWall() {
       setSubmitted(true);
       setTimeout(() => setSubmitted(false), 2800);
     } catch {
-      setError("Something went wrong — try again");
+      setError(t.confError);
     } finally {
       setSubmitting(false);
     }
@@ -63,8 +65,9 @@ export function ConfessionWall() {
   return (
     <section
       id="confession-wall"
-      aria-label="The Confession Wall"
+      aria-label={t.confHeading}
       className="relative py-16 sm:py-24 px-4 overflow-hidden"
+      dir={dir}
     >
       {/* watercolor blob bg for this section */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -90,16 +93,16 @@ export function ConfessionWall() {
       {/* ── header ── */}
       <div className="relative z-10 flex flex-col items-center text-center mb-10 sm:mb-14">
         <p className="font-sans font-light text-[9px] tracking-[0.55em] uppercase text-[#3D2B1F] mb-3">
-          Anonymous · Live · Everyone sees
+          {t.confEyebrow}
         </p>
         <h2
           className="font-[family-name:var(--font-display)] italic font-light text-3xl sm:text-5xl text-[#3D2B1F]"
           style={{ letterSpacing: "-0.01em" }}
         >
-          The Confession Wall
+          {t.confHeading}
         </h2>
         <p className="font-[family-name:var(--font-serif)] italic font-light text-base sm:text-lg text-[#3D2B1F] mt-3 max-w-xs sm:max-w-sm leading-relaxed">
-          Say anything. No names, no consequences — just honesty at a wedding.
+          {t.confDesc}
         </p>
         <div className="flex items-center gap-4 mt-4" aria-hidden>
           <div className="h-px w-10 sm:w-16 bg-gradient-to-r from-transparent to-[#D6A99D]/50" />
@@ -126,7 +129,7 @@ export function ConfessionWall() {
               type="text"
               value={text}
               onChange={(e) => { setText(e.target.value.slice(0, 120)); setError(""); }}
-              placeholder="Write your confession… (max 40 characters)"
+              placeholder={t.confPlaceholder}
               dir={isRTL ? "rtl" : "ltr"}
               maxLength={120}
               className="w-full bg-transparent px-5 pt-4 pb-3 font-[family-name:var(--font-serif)] italic text-base sm:text-lg text-[#3D2B1F] placeholder:text-[#3D2B1F]/35 outline-none"
@@ -137,7 +140,7 @@ export function ConfessionWall() {
                 className="font-sans text-[10px] tabular-nums"
                 style={{ color: remaining <= 20 ? "#C4607A" : "rgba(61,43,31,0.4)" }}
               >
-                {remaining} left
+                {t.confCharsLeft.replace("{n}", String(remaining))}
               </span>
               <button
                 type="submit"
@@ -158,7 +161,7 @@ export function ConfessionWall() {
                     <path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z" />
                   </svg>
                 )}
-                Post
+                {t.confPostBtn}
               </button>
             </div>
           </div>
@@ -182,7 +185,7 @@ export function ConfessionWall() {
                 initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
                 className="font-[family-name:var(--font-serif)] italic text-sm text-[#3D2B1F] mt-2 text-center"
               >
-                Your confession is on the wall. 👀
+                {t.confSuccess}
               </motion.p>
             )}
           </AnimatePresence>
@@ -193,7 +196,7 @@ export function ConfessionWall() {
       <div className="relative z-10 max-w-2xl mx-auto">
         {confessions.length === 0 ? (
           <p className="text-center font-[family-name:var(--font-serif)] italic text-[#3D2B1F]/50 text-sm">
-            The wall is empty. Be the first to confess.
+            {t.confEmpty}
           </p>
         ) : (
           <motion.div

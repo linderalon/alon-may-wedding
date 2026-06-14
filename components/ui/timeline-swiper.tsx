@@ -12,108 +12,65 @@ import { useLangContext } from "@/lib/lang-context";
 
 /* ─────────────────────────── data ─────────────────────────── */
 
-interface Slide {
-  date: string;
+import type { TranslationKey } from "@/lib/translations";
+
+interface SlideBase {
   chapter: string;
-  title: string;
-  text: string;
+  dateKey:  TranslationKey;
+  titleKey: TranslationKey;
+  textKey:  TranslationKey;
   photos: string[];
   alts: string[];
-  accent: string;    // bg wash colour
-  accentDark: string; // for text/borders
+  accent: string;
+  accentDark: string;
   special?: "proposal" | "finale";
 }
 
-const SLIDES: Slide[] = [
-  {
-    date: "January 2024", chapter: "01",
-    title: "Where We First Met",
-    text: "A moment neither of us planned — but both of us will never forget.",
-    photos: ["/photos/1.png"], alts: ["Where we first met"],
-    accent: "#F5E8E4", accentDark: "#C4877A",
-  },
-  {
-    date: "Early 2024", chapter: "02",
-    title: "Our First Date",
-    text: "Nervous laughs, long conversations, and the quiet realisation something special had begun.",
-    photos: ["/photos/2.png"], alts: ["Our first date"],
-    accent: "#F7EDE0", accentDark: "#C89060",
-  },
-  {
-    date: "March 2024", chapter: "03",
-    title: "First Birthday Together",
-    text: "The first of many celebrations. A birthday that felt different — because you were in it.",
-    photos: ["/photos/3.png"], alts: ["First birthday together"],
-    accent: "#F5EDD6", accentDark: "#B8962A",
-  },
-  {
-    date: "August 2024", chapter: "04",
-    title: "Always Eating",
-    text: "We have a love language, and it's food.",
-    photos: ["/photos/4.png","/photos/5.png","/photos/6.png","/photos/7.png","/photos/8.png","/photos/9.png"],
-    alts: ["Eating 1","Eating 2","Eating 3","Eating 4","Eating 5","Eating 6"],
-    accent: "#F4E8D4", accentDark: "#B07840",
-  },
-  {
-    date: "October 2024", chapter: "05",
-    title: "Moving In!",
-    text: "Boxes everywhere, a shared key, and the best chaos we've ever walked into together.",
-    photos: ["/photos/10.png"], alts: ["Moving in"],
-    accent: "#E4EDE8", accentDark: "#5C8870",
-  },
-  {
-    date: "March 2025", chapter: "06",
-    title: "First Long Trip Together",
-    text: "New roads, new skies, new sides of each other.",
-    photos: ["/photos/11.png","/photos/12.png","/photos/13.png"],
-    alts: ["Trip 1","Trip 2","Trip 3"],
-    accent: "#DDE8F0", accentDark: "#4878A0",
-  },
-  {
-    date: "March 2025", chapter: "07",
-    title: "Purim!",
-    text: "Costumes, laughter, and the kind of night that turns into a story you tell for years.",
-    photos: ["/photos/14.png"], alts: ["Purim"],
-    accent: "#EDE0F5", accentDark: "#8860C0",
-  },
-  {
-    date: "June 2025", chapter: "08",
-    title: "War & Shelters",
-    text: "The hard moments define us too. We held each other through the sirens.",
-    photos: ["/photos/15.png"], alts: ["War and shelters"],
-    accent: "#E8E8E4", accentDark: "#787870",
-  },
-  {
-    date: "August 2025", chapter: "09",
-    title: "Star Gazing",
-    text: "Lying under the open sky, saying nothing — and everything.",
-    photos: ["/photos/16.png"], alts: ["Star gazing"],
-    accent: "#DDE0EC", accentDark: "#4858A0",
-  },
-  {
-    date: "August 2025", chapter: "10",
-    title: "She Said Yes!",
-    text: "Under the stars, on one knee — and the best answer we've ever heard.",
-    photos: ["/photos/17.png"], alts: ["She said yes"],
-    accent: "#F0E0DC", accentDark: "#C4607A",
-    special: "proposal",
-  },
-  {
-    date: "Post-Engagement", chapter: "11",
-    title: "Spain",
-    text: "Celebrating us — sangria, sunshine, and the whole world ahead.",
-    photos: ["/photos/22.png","/photos/18.png","/photos/19.png","/photos/20.png","/photos/21.png"],
-    alts: ["Spain 1","Spain 2","Spain 3","Spain 4","Spain 5"],
-    accent: "#F5EDD0", accentDark: "#C09030",
-  },
-  {
-    date: "October 14th, 2026", chapter: "12",
-    title: "Are you ready?",
-    text: "Because we are.",
-    photos: [], alts: [],
-    accent: "#FBF3D5", accentDark: "#9CAFAA",
-    special: "finale",
-  },
+interface Slide extends SlideBase {
+  date:  string;
+  title: string;
+  text:  string;
+}
+
+const SLIDE_BASES: SlideBase[] = [
+  { chapter:"01", dateKey:"tl01Date", titleKey:"tl01Title", textKey:"tl01Text",
+    photos:["/photos/1.png"], alts:["Where we first met"],
+    accent:"#F5E8E4", accentDark:"#C4877A" },
+  { chapter:"02", dateKey:"tl02Date", titleKey:"tl02Title", textKey:"tl02Text",
+    photos:["/photos/2.png"], alts:["Our first date"],
+    accent:"#F7EDE0", accentDark:"#C89060" },
+  { chapter:"03", dateKey:"tl03Date", titleKey:"tl03Title", textKey:"tl03Text",
+    photos:["/photos/3.png"], alts:["First birthday together"],
+    accent:"#F5EDD6", accentDark:"#B8962A" },
+  { chapter:"04", dateKey:"tl04Date", titleKey:"tl04Title", textKey:"tl04Text",
+    photos:["/photos/4.png","/photos/5.png","/photos/6.png","/photos/7.png","/photos/8.png","/photos/9.png"],
+    alts:["Eating 1","Eating 2","Eating 3","Eating 4","Eating 5","Eating 6"],
+    accent:"#F4E8D4", accentDark:"#B07840" },
+  { chapter:"05", dateKey:"tl05Date", titleKey:"tl05Title", textKey:"tl05Text",
+    photos:["/photos/10.png"], alts:["Moving in"],
+    accent:"#E4EDE8", accentDark:"#5C8870" },
+  { chapter:"06", dateKey:"tl06Date", titleKey:"tl06Title", textKey:"tl06Text",
+    photos:["/photos/11.png","/photos/12.png","/photos/13.png"], alts:["Trip 1","Trip 2","Trip 3"],
+    accent:"#DDE8F0", accentDark:"#4878A0" },
+  { chapter:"07", dateKey:"tl07Date", titleKey:"tl07Title", textKey:"tl07Text",
+    photos:["/photos/14.png"], alts:["Purim"],
+    accent:"#EDE0F5", accentDark:"#8860C0" },
+  { chapter:"08", dateKey:"tl08Date", titleKey:"tl08Title", textKey:"tl08Text",
+    photos:["/photos/15.png"], alts:["War and shelters"],
+    accent:"#E8E8E4", accentDark:"#787870" },
+  { chapter:"09", dateKey:"tl09Date", titleKey:"tl09Title", textKey:"tl09Text",
+    photos:["/photos/16.png"], alts:["Star gazing"],
+    accent:"#DDE0EC", accentDark:"#4858A0" },
+  { chapter:"10", dateKey:"tl10Date", titleKey:"tl10Title", textKey:"tl10Text",
+    photos:["/photos/17.png"], alts:["She said yes"],
+    accent:"#F0E0DC", accentDark:"#C4607A", special:"proposal" },
+  { chapter:"11", dateKey:"tl11Date", titleKey:"tl11Title", textKey:"tl11Text",
+    photos:["/photos/22.png","/photos/18.png","/photos/19.png","/photos/20.png","/photos/21.png"],
+    alts:["Spain 1","Spain 2","Spain 3","Spain 4","Spain 5"],
+    accent:"#F5EDD0", accentDark:"#C09030" },
+  { chapter:"12", dateKey:"tl12Date", titleKey:"tl12Title", textKey:"tl12Text",
+    photos:[], alts:[],
+    accent:"#FBF3D5", accentDark:"#9CAFAA", special:"finale" },
 ];
 
 /* ─────────────────────────── variants ─────────────────────── */
@@ -166,7 +123,16 @@ function handTranslateY(index: number, active: number): number {
 /* ─────────────────────────── component ────────────────────── */
 
 export function TimelineSwiper() {
-  const { t } = useLangContext();
+  const { t, dir } = useLangContext();
+
+  // build translated slides on each render (cheap)
+  const SLIDES: Slide[] = SLIDE_BASES.map((b) => ({
+    ...b,
+    date:  t[b.dateKey]  as string,
+    title: t[b.titleKey] as string,
+    text:  t[b.textKey]  as string,
+  }));
+
   const [current, setCurrent] = React.useState(0);
   const [direction, setDirection] = React.useState(0);
   const [hasInteracted, setHasInteracted] = React.useState(false);
@@ -273,7 +239,7 @@ export function TimelineSwiper() {
           className="font-sans font-light text-[9px] tracking-[0.45em] uppercase"
           style={{ color: "#3D2B1F" }}
         >
-          A love story
+          {t.aLoveStory}
         </span>
         <span
           className="font-sans font-light text-[10px] tabular-nums"
@@ -287,6 +253,7 @@ export function TimelineSwiper() {
       <div
         className="relative z-10 flex-1 flex items-center justify-center overflow-hidden select-none"
         style={{ touchAction: "pan-y" }}
+        dir={dir}
       >
         <AnimatePresence custom={direction} mode="popLayout">
           <motion.div
@@ -320,7 +287,7 @@ export function TimelineSwiper() {
                 letterSpacing: "-0.01em",
               }}
             >
-              {current === 0 ? t.whereWeFirstMet : current === 1 ? t.ourFirstDate : slide.title}
+              {slide.title}
             </h2>
 
             {/* ── photos ── */}
@@ -414,7 +381,7 @@ export function TimelineSwiper() {
               </svg>
             </motion.div>
             <span className="font-sans font-light text-[10px] tracking-[0.35em] uppercase" style={{ color: "#3D2B1F", opacity: 0.65 }}>
-              Swipe to explore
+              {t.swipeToExplore}
             </span>
           </motion.div>
         )}
@@ -426,7 +393,7 @@ export function TimelineSwiper() {
         <button
           onClick={() => { goPrev(); setHasInteracted(true); }}
           disabled={current === 0}
-          aria-label="Previous"
+          aria-label={t.prev}
           className="cursor-pointer flex items-center justify-center w-10 h-10 rounded-full border transition-all duration-200 active:scale-95 disabled:opacity-20 disabled:cursor-not-allowed"
           style={{
             background: "rgba(255,255,255,0.65)",
@@ -458,7 +425,7 @@ export function TimelineSwiper() {
         <button
           onClick={() => { goNext(); setHasInteracted(true); }}
           disabled={current === total - 1}
-          aria-label="Next"
+          aria-label={t.next}
           className="cursor-pointer flex items-center justify-center w-10 h-10 rounded-full border transition-all duration-200 active:scale-95 disabled:opacity-20 disabled:cursor-not-allowed"
           style={{
             background: "rgba(255,255,255,0.65)",

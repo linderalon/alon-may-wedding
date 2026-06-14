@@ -92,7 +92,7 @@ export function LanguageLobby({ onEnter }: Props) {
           animate={{ opacity: 1, y: 0, transition: { delay: 0.8, duration: 0.7 } }}
           className="font-[family-name:var(--font-serif)] italic font-light text-xl sm:text-2xl text-[#3D2B1F] mb-10 sm:mb-12"
         >
-          Choose your language to continue
+          Choose your language / בחרו שפה
         </motion.p>
 
         {/* CTA buttons */}
