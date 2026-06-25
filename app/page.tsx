@@ -84,10 +84,11 @@ export default function Home() {
           { key: "ourStory",       href: "#our-story"       },
           { key: "polyWedding",    href: "#poly-wedding"    },
           { key: "confessionWall", href: "#confession-wall" },
+          { key: "giftLinks",      href: "#gift"            },
         ] as const).map(({ key, href }) => (
           <a key={key} href={href}
-            className="font-sans font-light text-[9px] sm:text-[11px] tracking-[0.22em] sm:tracking-[0.26em] uppercase text-[#3D2B1F] hover:text-[#3D2B1F]/60 transition-colors duration-200 cursor-pointer whitespace-nowrap min-h-[44px] flex items-center">
-            {t[key]}
+            className="font-sans font-bold text-[9px] sm:text-[11px] tracking-[0.22em] sm:tracking-[0.26em] uppercase text-[#3D2B1F] hover:text-[#3D2B1F]/60 transition-colors duration-200 cursor-pointer whitespace-nowrap min-h-[44px] flex items-center">
+            {key === "giftLinks" ? "Bit / Paybox" : t[key as keyof typeof t]}
           </a>
         ))}
       </nav>
@@ -141,19 +142,19 @@ export default function Home() {
             <div className="h-px w-8 sm:w-16 bg-gradient-to-l from-transparent to-[#7A9A6A]/55" />
           </div>
 
-          <p className="font-[family-name:var(--font-serif)] italic font-light text-lg sm:text-2xl tracking-[0.04em] text-[#4A5E35] mt-3 sm:mt-5 anim-fade-up3">
+          <p className="font-[family-name:var(--font-serif)] italic font-light text-lg sm:text-2xl tracking-[0.04em] text-[#3D2B1F] mt-3 sm:mt-5 anim-fade-up3">
             {t.subtitle}
           </p>
 
           <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-10 mt-6 sm:mt-10 anim-fade-up4">
             <div className="flex flex-col items-center gap-1">
-              <span className="font-sans font-light text-[11px] tracking-[0.38em] uppercase text-[#4A5E35]/65">{t.dateLabel}</span>
-              <span className="font-[family-name:var(--font-serif)] text-[1.35rem] sm:text-2xl text-[#3D4A2A]">{t.dateValue}</span>
+              <span className="font-sans font-light text-[11px] tracking-[0.38em] uppercase text-[#3D2B1F]">{t.dateLabel}</span>
+              <span className="font-[family-name:var(--font-serif)] text-[1.35rem] sm:text-2xl text-[#3D2B1F]">{t.dateValue}</span>
             </div>
-            <div className="hidden sm:block w-px h-10 bg-[#4A5E35]/18" aria-hidden />
+            <div className="hidden sm:block w-px h-10 bg-[#3D2B1F]/20" aria-hidden />
             <div className="flex flex-col items-center gap-1">
-              <span className="font-sans font-light text-[11px] tracking-[0.38em] uppercase text-[#4A5E35]/65">{t.venueLabel}</span>
-              <span className="font-[family-name:var(--font-serif)] text-[1.35rem] sm:text-2xl text-[#3D4A2A]">{t.venueValue}</span>
+              <span className="font-sans font-light text-[11px] tracking-[0.38em] uppercase text-[#3D2B1F]">{t.venueLabel}</span>
+              <span className="font-[family-name:var(--font-serif)] text-[1.35rem] sm:text-2xl text-[#3D2B1F]">{t.venueValue}</span>
             </div>
           </div>
 
