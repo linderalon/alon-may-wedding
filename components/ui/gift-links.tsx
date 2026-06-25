@@ -42,7 +42,7 @@ export function GiftLinks() {
 
           {/* Bit */}
           <motion.a
-            href="#"  /* replace with real Bit link */
+            href="https://www.bitpay.co.il/app/me/F4AFEE85-5184-1B2E-2EA1-08EF96D72A008806"
             target="_blank"
             rel="noopener noreferrer"
             whileHover={{ scale: 1.03, boxShadow: "0 8px 30px rgba(255,59,48,0.18)" }}
