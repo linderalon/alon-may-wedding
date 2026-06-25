@@ -9,6 +9,7 @@ import { ConfessionWall } from "@/components/ui/confession-wall";
 import { FallingLeaves } from "@/components/ui/falling-leaves";
 import { LanguageLobby, useLang, type Lang } from "@/components/ui/language-lobby";
 import { useLangContext } from "@/lib/lang-context";
+import { GiftLinks } from "@/components/ui/gift-links";
 
 export default function Home() {
   const { lang, setLang } = useLang();
@@ -228,6 +229,9 @@ export default function Home() {
           className="hidden sm:block absolute top-0 right-8 w-[65px] sm:w-[90px] pointer-events-none select-none opacity-40 rotate-[15deg]" />
         <ConfessionWall />
       </div>
+
+      {/* ── GIFT LINKS ── */}
+      <GiftLinks />
 
       {/* ── footer ── */}
       <footer className="relative py-10 sm:py-14 overflow-hidden"
