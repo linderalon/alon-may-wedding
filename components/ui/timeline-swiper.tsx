@@ -304,7 +304,7 @@ export function TimelineSwiper() {
 
             ) : slide.special === "proposal" ? (
               /* proposal: ring icon above + photo(s) — swipeable when there's more than one */
-              <div className="flex flex-col items-center gap-3 mb-5">
+              <div className="flex flex-col items-center gap-3 mb-5 w-full">
                 <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none"
                   stroke={`${slide.accentDark}88`} strokeWidth="1.1">
                   <circle cx="12" cy="14" r="7" />
