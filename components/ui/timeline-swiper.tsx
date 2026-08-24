@@ -62,7 +62,7 @@ const SLIDE_BASES: SlideBase[] = [
     photos:["/photos/16.png"], alts:["Star gazing"],
     accent:"#DDE0EC", accentDark:"#4858A0" },
   { chapter:"10", dateKey:"tl10Date", titleKey:"tl10Title", textKey:"tl10Text",
-    photos:["/photos/17.png"], alts:["She said yes"],
+    photos:["/photos/17.png","/photos/23.jpg"], alts:["She said yes","She said yes 2"],
     accent:"#F0E0DC", accentDark:"#C4607A", special:"proposal" },
   { chapter:"11", dateKey:"tl11Date", titleKey:"tl11Title", textKey:"tl11Text",
     photos:["/photos/22.png","/photos/18.png","/photos/19.png","/photos/20.png","/photos/21.png"],
@@ -303,7 +303,7 @@ export function TimelineSwiper() {
               </div>
 
             ) : slide.special === "proposal" ? (
-              /* proposal: large image + ring icon above */
+              /* proposal: ring icon above + photo(s) — swipeable when there's more than one */
               <div className="flex flex-col items-center gap-3 mb-5">
                 <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none"
                   stroke={`${slide.accentDark}88`} strokeWidth="1.1">
@@ -311,11 +311,19 @@ export function TimelineSwiper() {
                   <path d="M9 14 Q12 10 15 14" />
                   <path d="M9 7 L7 4 M15 7 L17 4 M9 7 L15 7" />
                 </svg>
-                <Photo
-                  src={slide.photos[0]} alt={slide.alts[0]}
-                  rotate={0.5}
-                  extraStyle={{ width: 400, height: 400 }}
-                />
+                {isMulti ? (
+                  <PhotoHand
+                    photos={slide.photos}
+                    alts={slide.alts}
+                    accentDark={slide.accentDark}
+                  />
+                ) : (
+                  <Photo
+                    src={slide.photos[0]} alt={slide.alts[0]}
+                    rotate={0.5}
+                    extraStyle={{ width: 400, height: 400 }}
+                  />
+                )}
               </div>
 
             ) : isMulti ? (
