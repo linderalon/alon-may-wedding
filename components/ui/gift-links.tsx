@@ -93,11 +93,6 @@ export function GiftLinks() {
           </motion.a>
         </div>
 
-        {/* disclaimer */}
-        <p className="font-[family-name:var(--font-serif)] italic font-light text-xs sm:text-sm text-[#3D2B1F]/45 mt-8 max-w-xs sm:max-w-sm leading-relaxed">
-          * We&apos;re sad if you couldn&apos;t make it to our wedding! If you still like it, links are valid to everyone! ;)
-        </p>
-
       </div>
     </section>
   );
