@@ -129,7 +129,7 @@ function PollBlock({ poll, allVotes, refetch }: {
                     borderColor: isVoted ? c.dark : "rgba(92,74,58,0.10)",
                     boxShadow: isVoted ? `0 4px 24px ${c.color}40` : "0 2px 12px rgba(92,74,58,0.06)",
                   }}>
-                  <motion.div className="absolute inset-y-0 left-0 rounded-2xl"
+                  <motion.div className="absolute inset-y-0 start-0 rounded-2xl"
                     style={{ background: `${c.color}28` }}
                     initial={{ width: "20%" }}
                     animate={{ width: `${percentage}%` }}
@@ -139,7 +139,7 @@ function PollBlock({ poll, allVotes, refetch }: {
                     <span className="font-sans text-[10px] text-[#3D2B1F]/60 w-3 tabular-nums">
                       {sortedCandidates.indexOf(c) + 1}
                     </span>
-                    <span className="font-[family-name:var(--font-display)] italic text-base sm:text-lg flex-1 text-left text-[#3D2B1F]">
+                    <span className="font-[family-name:var(--font-display)] italic text-base sm:text-lg flex-1 text-start text-[#3D2B1F]">
                       {c.label}
                     </span>
                     {hasVoted && (
@@ -147,7 +147,7 @@ function PollBlock({ poll, allVotes, refetch }: {
                         {voteCount} {voteCount === 1 ? "vote" : "votes"}
                       </span>
                     )}
-                    <motion.span className="font-sans font-light tabular-nums min-w-[44px] text-right text-sm sm:text-base"
+                    <motion.span className="font-sans font-light tabular-nums min-w-[44px] text-end text-sm sm:text-base"
                       style={{ color: isVoted ? c.dark : "#3D2B1F" }}>
                       {votes ? `${percentage}%` : "—"}
                     </motion.span>
@@ -155,7 +155,7 @@ function PollBlock({ poll, allVotes, refetch }: {
                       {isVoted && (
                         <motion.span initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
                           exit={{ scale: 0, opacity: 0 }} transition={{ type: "spring", stiffness: 400, damping: 20 }}
-                          className="ml-1">
+                          className="ms-1">
                           <svg className="w-4 h-4" viewBox="0 0 20 20" fill={c.dark}>
                             <path fillRule="evenodd"
                               d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"

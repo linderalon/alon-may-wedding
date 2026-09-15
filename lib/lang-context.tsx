@@ -27,11 +27,15 @@ export function LangProvider({ children }: { children: React.ReactNode }) {
     if (stored === "en" || stored === "he") setLangState(stored);
   }, []);
 
+  // keep the document direction in sync with the active language, on every
+  // change (initial restore from storage included, not just explicit picks)
+  React.useEffect(() => {
+    document.documentElement.dir = lang === "he" ? "rtl" : "ltr";
+  }, [lang]);
+
   const setLang = React.useCallback((l: Lang) => {
     setLangState(l);
     localStorage.setItem("wedding-lang", l);
-    // flip document direction for RTL
-    document.documentElement.dir = l === "he" ? "rtl" : "ltr";
   }, []);
 
   const value: LangCtx = {
