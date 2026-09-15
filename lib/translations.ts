@@ -72,24 +72,44 @@ export const translations = {
     tl11Title:  "Spain",
     tl11Text:   "Celebrating us — sangria, sunshine, and the whole world ahead.",
 
-    tl12Date:   "October 14th, 2026",
-    tl12Title:  "Are you ready?",
-    tl12Text:   "Because we are.",
+    tl12Date:   "July 2026",
+    tl12Title:  "Beer Sheva Out, Tel Mond In",
+    tl12Text:   "After 2.5 years together in Beer Sheva and countless memories, we are finally starting a new chapter in Tel Mond.",
+
+    tl13Date:   "October 14th, 2026",
+    tl13Title:  "Are you ready?",
+    tl13Text:   "Because we are.",
 
     // poly-wedding
     polyEyebrow:       "The real bet",
     polyHeading:       "Poly-Wedding",
-    polyDesc:          "Who will cry first at the wedding? Cast your vote and watch the odds shift.",
-    polyMay:           "May",
-    polyAlon:          "Alon",
-    polyAlonsMom:      "Alon's Mom",
-    polyMaysMom:       "May's Mom",
-    polyNoOne:         "No one",
+    polyDesc:          "Cast your vote and watch the odds shift.",
     polyVotedMsg:      "You voted for {name} — bold choice.",
     polyAlreadyVoted:  "You already voted · results update live",
     polyFirstVote:     "Be the first to vote.",
     polyVotesCount:    "{n} votes cast",
     polyVoteCount1:    "{n} vote cast",
+
+    // poly-wedding — question 1: who cries first
+    polyQ1:            "Who will cry first at the wedding?",
+    polyMay:           "May",
+    polyAlon:          "Alon",
+    polyAlonsMom:      "Alon's Mom",
+    polyMaysMom:       "May's Mom",
+    polyNoOne:         "No one",
+
+    // poly-wedding — question 2: glass break attempts
+    polyQ2:            "How many attempts will Alon take to break the glass?",
+    polyGlassOne:      "One, he's a champ",
+    polyGlassTwo:      "Two, at least",
+    polyGlassThreePlus:"Three or more, I'm sure",
+
+    // poly-wedding — question 3: entrance song genre
+    polyQ3:            "What genre will the entrance song be?",
+    polySongRnb:       "Old American R&B",
+    polySongMetal:     "Heavy Metal",
+    polySongHebrew:    "Classic Hebrew Song",
+    polySongMizrahi:   "Middle Eastern",
 
     // confession wall
     confEyebrow:       "Anonymous · Live · Everyone sees",
@@ -178,24 +198,44 @@ export const translations = {
     tl11Title:  "ספרד",
     tl11Text:   "חוגגים אותנו — סנגריה, שמש, וכל העולם לפנינו.",
 
-    tl12Date:   "14 באוקטובר 2026",
-    tl12Title:  "?מוכנים",
-    tl12Text:   "כי אנחנו כן.",
+    tl12Date:   "יולי 2026",
+    tl12Title:  "עוזבים את באר שבע, עוברים לתל מונד",
+    tl12Text:   "אחרי שנתיים וחצי ביחד בבאר שבע ואינספור זכרונות, אנחנו סוף סוף מתחילים פרק חדש בתל מונד.",
+
+    tl13Date:   "14 באוקטובר 2026",
+    tl13Title:  "?מוכנים",
+    tl13Text:   "כי אנחנו כן.",
 
     // poly-wedding
     polyEyebrow:       "ההימור האמיתי",
     polyHeading:       "הימורי חתונה",
-    polyDesc:          "מי יבכה ראשון בחתונה? הצביעו וצפו בסיכויים משתנים.",
-    polyMay:           "מאי",
-    polyAlon:          "אלון",
-    polyAlonsMom:      "אמא של אלון",
-    polyMaysMom:       "אמא של מאי",
-    polyNoOne:         "אף אחד",
+    polyDesc:          "הצביעו וצפו בסיכויים משתנים.",
     polyVotedMsg:      "הצבעת על {name} — בחירה נועזת.",
     polyAlreadyVoted:  "כבר הצבעת · התוצאות מתעדכנות בזמן אמת",
     polyFirstVote:     "היה הראשון להצביע.",
     polyVotesCount:    "{n} הצבעות",
     polyVoteCount1:    "הצבעה אחת",
+
+    // poly-wedding — question 1: who cries first
+    polyQ1:            "מי יבכה ראשון בחתונה?",
+    polyMay:           "מאי",
+    polyAlon:          "אלון",
+    polyAlonsMom:      "אמא של אלון",
+    polyMaysMom:       "אמא של מאי",
+    polyNoOne:         "אף אחד",
+
+    // poly-wedding — question 2: glass break attempts
+    polyQ2:            "כמה ניסיונות אלון יצטרך כדי לשבור את הכוס?",
+    polyGlassOne:      "פעם אחת, הוא אלוף",
+    polyGlassTwo:      "פעמיים, לפחות",
+    polyGlassThreePlus:"בשביל הפאדיחה, שלוש פלוס",
+
+    // poly-wedding — question 3: entrance song genre
+    polyQ3:            "מה יהיה הסגנון של שיר הכניסה?",
+    polySongRnb:       "אר אנד בי אמריקאי",
+    polySongMetal:     "רוק כבד",
+    polySongHebrew:    "שיר קלאסי בעברית",
+    polySongMizrahi:   "מזרחית",
 
     // confession wall
     confEyebrow:       "אנונימי · בזמן אמת · כולם רואים",

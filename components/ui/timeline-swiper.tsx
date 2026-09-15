@@ -5,6 +5,7 @@ import {
   motion,
   AnimatePresence,
   useAnimation,
+  useReducedMotion,
   type PanInfo,
 } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -69,6 +70,9 @@ const SLIDE_BASES: SlideBase[] = [
     alts:["Spain 1","Spain 2","Spain 3","Spain 4","Spain 5"],
     accent:"#F5EDD0", accentDark:"#C09030" },
   { chapter:"12", dateKey:"tl12Date", titleKey:"tl12Title", textKey:"tl12Text",
+    photos:["/photos/24.jpg"], alts:["Moving to Tel Mond"],
+    accent:"#EDE4D8", accentDark:"#A87850" },
+  { chapter:"13", dateKey:"tl13Date", titleKey:"tl13Title", textKey:"tl13Text",
     photos:[], alts:[],
     accent:"#FBF3D5", accentDark:"#9CAFAA", special:"finale" },
 ];
@@ -292,13 +296,9 @@ export function TimelineSwiper() {
 
             {/* ── photos ── */}
             {slide.special === "finale" ? (
-              /* finale: decorative diamond instead of photo */
-              <div className="flex flex-col items-center gap-3 my-4 sm:my-6">
-                <svg style={{ color: "#9CAFAA" }} className="w-12 h-12 sm:w-16 sm:h-16" viewBox="0 0 48 48" fill="none">
-                  <path d="M24 4 L28 18 L44 24 L28 30 L24 44 L20 30 L4 24 L20 18 Z"
-                    stroke="currentColor" strokeWidth="1.2" fill="rgba(156,175,170,0.15)" />
-                  <circle cx="24" cy="24" r="4" fill="currentColor" opacity="0.4" />
-                </svg>
+              /* finale: celebratory fireworks instead of photo */
+              <div className="flex flex-col items-center gap-3 my-4 sm:my-6 w-full">
+                <Fireworks />
                 <div className="h-px w-16 sm:w-24" style={{ background: `${slide.accentDark}30` }} />
               </div>
 
@@ -473,6 +473,85 @@ export function TimelineSwiper() {
         <ChevronRight className="w-6 h-6" style={{ color: slide.accentDark }} />
       </button>
     </section>
+  );
+}
+
+/* ── Fireworks — celebratory burst animation for the finale slide ── */
+const FIREWORK_COLORS = ["#C4877A", "#9CAFAA", "#D6A99D", "#B8962A"];
+const FIREWORK_BURSTS = [
+  { x: "28%", y: "38%", delay: 0,    scale: 0.85, colorIdx: 0 },
+  { x: "72%", y: "30%", delay: 0.55, scale: 1,    colorIdx: 1 },
+  { x: "50%", y: "58%", delay: 1.1,  scale: 0.7,  colorIdx: 2 },
+];
+const PARTICLE_ANGLES = Array.from({ length: 12 }, (_, i) => (i / 12) * Math.PI * 2);
+
+function FireworkBurst({
+  x, y, delay, scale, color,
+}: {
+  x: string; y: string; delay: number; scale: number; color: string;
+}) {
+  const radius = 30 * scale;
+  return (
+    <div className="absolute" style={{ left: x, top: y }}>
+      {PARTICLE_ANGLES.map((angle, i) => (
+        <motion.span
+          key={i}
+          className="absolute rounded-full"
+          style={{
+            width: 4 * scale, height: 4 * scale,
+            background: color,
+            boxShadow: `0 0 ${6 * scale}px ${color}`,
+            top: -2 * scale, left: -2 * scale,
+          }}
+          animate={{
+            x:       [0, Math.cos(angle) * radius],
+            y:       [0, Math.sin(angle) * radius],
+            opacity: [0, 1, 0],
+            scale:   [0.3, 1, 0.4],
+          }}
+          transition={{
+            duration: 1.4,
+            delay,
+            repeat: Infinity,
+            repeatDelay: 2.2,
+            ease: "easeOut",
+          }}
+        />
+      ))}
+      {/* central flash */}
+      <motion.span
+        className="absolute rounded-full"
+        style={{ width: 6 * scale, height: 6 * scale, background: color, top: -3 * scale, left: -3 * scale }}
+        animate={{ opacity: [0, 1, 0], scale: [0.5, 1.6, 0.5] }}
+        transition={{ duration: 1.4, delay, repeat: Infinity, repeatDelay: 2.2, ease: "easeOut" }}
+      />
+    </div>
+  );
+}
+
+function Fireworks() {
+  const prefersReducedMotion = useReducedMotion();
+
+  if (prefersReducedMotion) {
+    return (
+      <div className="flex items-center justify-center gap-2" aria-hidden>
+        {FIREWORK_COLORS.slice(0, 3).map((c, i) => (
+          <span key={i} className="w-2 h-2 rounded-full" style={{ background: c }} />
+        ))}
+      </div>
+    );
+  }
+
+  return (
+    <div className="relative w-full" style={{ height: 110 }} aria-hidden>
+      {FIREWORK_BURSTS.map((b, i) => (
+        <FireworkBurst
+          key={i}
+          x={b.x} y={b.y} delay={b.delay} scale={b.scale}
+          color={FIREWORK_COLORS[b.colorIdx]}
+        />
+      ))}
+    </div>
   );
 }
 

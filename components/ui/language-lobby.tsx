@@ -33,19 +33,11 @@ export function LanguageLobby({ onEnter }: Props) {
       className="fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden"
       style={{ background: "linear-gradient(160deg,#FDFAF4 0%,#F9EFE7 45%,#EFF0EC 100%)" }}
     >
-      {/* watercolor washes */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/31.png" alt="" aria-hidden
-        className="absolute top-0 left-0 w-[55vw] max-w-[480px] pointer-events-none select-none opacity-50 -translate-x-[8%] -translate-y-[5%]" />
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/30.png" alt="" aria-hidden
-        className="absolute top-0 right-0 w-[45vw] max-w-[400px] pointer-events-none select-none opacity-40 translate-x-[8%] -translate-y-[5%]" />
-
       {/* weeping willow centred */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src="/33.png" alt="" aria-hidden
-        className="absolute top-1/2 left-1/2 pointer-events-none select-none opacity-40"
-        style={{ width: "min(92vw, 820px)", transform: "translate(-50%, -54%)" }} />
+        className="absolute top-1/2 left-1/2 pointer-events-none select-none opacity-[0.30] w-[190vw] max-w-none sm:w-[min(108vw,984px)]"
+        style={{ transform: "translate(-50%, -54%)" }} />
 
       {/* falling leaves */}
       <FallingLeaves />

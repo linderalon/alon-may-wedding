@@ -1,7 +1,20 @@
 {
-  "may": 0,
-  "alon": 1,
-  "alons-mom": 0,
-  "mays-mom": 0,
-  "no-one": 0
+  "whoCries": {
+    "may": 0,
+    "alon": 1,
+    "alons-mom": 0,
+    "mays-mom": 0,
+    "no-one": 0
+  },
+  "glassBreak": {
+    "one": 0,
+    "two": 0,
+    "three-plus": 0
+  },
+  "entranceSong": {
+    "rnb": 0,
+    "heavy-metal": 0,
+    "classic-hebrew": 0,
+    "middle-eastern": 0
+  }
 }

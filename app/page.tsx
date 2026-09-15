@@ -100,16 +100,10 @@ export default function Home() {
         className="paper-texture relative min-h-[100svh] flex flex-col items-center justify-center overflow-hidden"
         style={{ background: "linear-gradient(160deg,#FDFAF4 0%,#F9EFE7 45%,#EFF0EC 100%)" }}>
 
-        {/* ── LAYER 1: pink watercolour washes left & right ── */}
-        <Image src="/31.png" alt="" aria-hidden width={700} height={600}
-          className="absolute top-[5%] left-0 w-[45vw] max-w-[460px] pointer-events-none select-none opacity-55 -translate-x-[10%]" />
-        <Image src="/30.png" alt="" aria-hidden width={600} height={520}
-          className="absolute top-[10%] right-0 w-[38vw] max-w-[400px] pointer-events-none select-none opacity-45 translate-x-[10%]" />
-
         {/* ── LAYER 2: weeping willow — massive centred background ── */}
         <Image src="/33.png" alt="" aria-hidden width={900} height={820}
-          className="absolute top-1/2 left-1/2 pointer-events-none select-none opacity-45"
-          style={{ width:"min(96vw,900px)", transform:"translate(-50%,-54%)" }} />
+          className="absolute top-1/2 left-1/2 pointer-events-none select-none opacity-[0.35] w-[190vw] max-w-none sm:w-[min(112vw,1080px)]"
+          style={{ transform:"translate(-50%,-54%)" }} />
 
         {/* ── LAYER 3: falling leaves canvas animation ── */}
         <FallingLeaves />
@@ -120,14 +114,14 @@ export default function Home() {
           dir={dir}
           style={{ paddingTop: "max(100px, 16svh)", paddingBottom: "max(80px, 12svh)" }}>
 
-          <p className="font-sans font-light text-[10px] sm:text-xs tracking-[0.55em] uppercase text-[#3D4A2A] mb-3 sm:mb-5 anim-fade-up">
+          <p className="font-sans font-light text-[12px] sm:text-xs tracking-[0.55em] uppercase text-[#3D4A2A] mb-3 sm:mb-5 anim-fade-up">
             {t.saveTheDate}
           </p>
 
           <h1
             className="font-[family-name:var(--font-display)] italic font-light leading-[0.9] anim-fade-up2"
             style={{
-              fontSize: "clamp(3.2rem, 14vw, 10rem)",
+              fontSize: "clamp(3.32rem, 14vw, 10rem)",
               letterSpacing: "-0.01em",
               color: "#4A5E35",
               textShadow: "0 2px 32px rgba(74,94,53,0.12)",
@@ -142,25 +136,25 @@ export default function Home() {
             <div className="h-px w-8 sm:w-16 bg-gradient-to-l from-transparent to-[#7A9A6A]/55" />
           </div>
 
-          <p className="font-[family-name:var(--font-serif)] italic font-light text-lg sm:text-2xl tracking-[0.04em] text-[#3D2B1F] mt-3 sm:mt-5 anim-fade-up3">
+          <p className="font-[family-name:var(--font-serif)] italic font-light text-[20px] sm:text-2xl tracking-[0.04em] text-[#3D2B1F] mt-3 sm:mt-5 anim-fade-up3">
             {t.subtitle}
           </p>
 
           <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-10 mt-6 sm:mt-10 anim-fade-up4">
             <div className="flex flex-col items-center gap-1">
-              <span className="font-sans font-light text-[11px] tracking-[0.38em] uppercase text-[#3D2B1F]">{t.dateLabel}</span>
-              <span className="font-[family-name:var(--font-serif)] text-[1.35rem] sm:text-2xl text-[#3D2B1F]">{t.dateValue}</span>
+              <span className="font-sans font-light text-[13px] tracking-[0.38em] uppercase text-[#3D2B1F]">{t.dateLabel}</span>
+              <span className="font-[family-name:var(--font-serif)] text-[1.475rem] sm:text-2xl text-[#3D2B1F]">{t.dateValue}</span>
             </div>
             <div className="hidden sm:block w-px h-10 bg-[#3D2B1F]/20" aria-hidden />
             <div className="flex flex-col items-center gap-1">
-              <span className="font-sans font-light text-[11px] tracking-[0.38em] uppercase text-[#3D2B1F]">{t.venueLabel}</span>
-              <span className="font-[family-name:var(--font-serif)] text-[1.35rem] sm:text-2xl text-[#3D2B1F]">{t.venueValue}</span>
+              <span className="font-sans font-light text-[13px] tracking-[0.38em] uppercase text-[#3D2B1F]">{t.venueLabel}</span>
+              <span className="font-[family-name:var(--font-serif)] text-[1.475rem] sm:text-2xl text-[#3D2B1F]">{t.venueValue}</span>
             </div>
           </div>
 
           <div className="mt-7 sm:mt-10 anim-fade-up5">
             <a href="#our-story"
-              className="cursor-pointer inline-flex items-center justify-center min-h-[48px] px-10 rounded-full font-sans font-light text-[11px] tracking-[0.24em] uppercase text-[#4A5E35] border border-[#4A5E35]/35 transition-all duration-200 hover:border-[#4A5E35]/65 hover:bg-white/50 active:scale-[0.97] whitespace-nowrap">
+              className="cursor-pointer inline-flex items-center justify-center min-h-[48px] px-10 rounded-full font-sans font-light text-[13px] tracking-[0.24em] uppercase text-[#4A5E35] border border-[#4A5E35]/35 transition-all duration-200 hover:border-[#4A5E35]/65 hover:bg-white/50 active:scale-[0.97] whitespace-nowrap">
               {t.ourStory}
             </a>
           </div>
@@ -168,7 +162,7 @@ export default function Home() {
 
         <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 anim-fade-up5 z-10" aria-hidden>
           <div className="w-px h-8 bg-gradient-to-b from-[#4A5E35]/0 to-[#4A5E35]/25" />
-          <span className="font-sans font-light text-[9px] tracking-[0.40em] uppercase text-[#4A5E35]/60 mt-1">{t.scroll}</span>
+          <span className="font-sans font-light text-[11px] tracking-[0.40em] uppercase text-[#4A5E35]/60 mt-1">{t.scroll}</span>
         </div>
       </section>
 
